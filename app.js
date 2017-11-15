@@ -12,7 +12,13 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'Hello from render (ejs)',
-        list: ['a','b', 'c', 'd']
+        nav: [{
+                Link: '/Books',
+                Text: 'Books'
+            }, {
+                Link: '/Authors',
+                Text: 'Authors'
+            }]
     });
 });
 
