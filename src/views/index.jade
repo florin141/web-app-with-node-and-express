@@ -1,7 +1,24 @@
 html
     head
         title MyApp
-    body
-        h1 My app
-        p
-            h3 sub heading
+
+        //- bower:css
+        link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet', href='/lib/font-awesome/css/font-awesome.min.css')
+        //- endbower 
+        //- bower:js
+        script(src='/lib/jquery/dist/jquery.js')
+        script(src='/lib/bootstrap/dist/js/bootstrap.js')
+        //- endbower 
+        //- inject:css 
+        link(rel="stylesheet", href="/css/styles.css") 
+        //- endinject 
+        //- inject:js 
+        script(src="/js/app.js") 
+        //- endinject 
+    body(class='myClass')
+        h1(id='myId') My app
+        h3 sub heading
+        ul
+            each val in list
+                li= val
