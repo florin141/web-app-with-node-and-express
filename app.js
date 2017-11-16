@@ -17,10 +17,10 @@ app.get('/', function (req, res) {
     res.render('index', {
         title: 'Hello from render (ejs)',
         nav: [{
-                Link: '/Books',
+                Link: '/books',
                 Text: 'Books'
             }, {
-                Link: '/Authors',
+                Link: '/authors',
                 Text: 'Authors'
             }]
     });
