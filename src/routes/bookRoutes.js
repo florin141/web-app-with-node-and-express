@@ -71,7 +71,7 @@ var router = function(nav) {
         });
     
     bookRouter.route('/:id')
-        .get(function (req, res) {
+        .all(function (req, res, next) {
             var id = req.params.id;
             var ps = new sql.PreparedStatement();
             ps.input('id', sql.Int);
@@ -79,14 +79,20 @@ var router = function(nav) {
                 ps.execute({
                     id: req.params.id
                 }, function (err, result) {
-                    res.render('bookView', {
-                        title: 'Books',
-                        nav: nav,
-                        book: result.recordset[0]
-                    });
-
-                    console.log(result.recordset[0])
+                    if (result.recordset.length === 0) {
+                        res.status(404).send('Not Fount');
+                    } else {
+                        req.book = result.recordset[0];
+                        next();
+                    }
                 })
+            });
+        })
+        .get(function (req, res) {
+            res.render('bookView', {
+                title: 'Books',
+                nav: nav,
+                book: req.book
             });
         });
 
