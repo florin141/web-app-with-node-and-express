@@ -73,10 +73,20 @@ var router = function(nav) {
     bookRouter.route('/:id')
         .get(function (req, res) {
             var id = req.params.id;
-            res.render('bookView', {
-                title: 'Books',
-                nav: nav,
-                book: books[id]
+            var ps = new sql.PreparedStatement();
+            ps.input('id', sql.Int);
+            ps.prepare('select * from books where id = @id', function (error) {
+                ps.execute({
+                    id: req.params.id
+                }, function (err, result) {
+                    res.render('bookView', {
+                        title: 'Books',
+                        nav: nav,
+                        book: result.recordset[0]
+                    });
+
+                    console.log(result.recordset[0])
+                })
             });
         });
 
