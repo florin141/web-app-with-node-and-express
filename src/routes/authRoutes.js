@@ -27,7 +27,7 @@ var router = function () {
 
     authRouter.route('/signIn')
         .post(passport.authenticate('local', {
-            faliureRedirect: '/'
+            failureRedirect: '/'
         }), function (req, res) {
             res.redirect('/auth/profile');
         });
